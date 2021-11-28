@@ -179,6 +179,11 @@ dependencies {
     // classpath.
     androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$espresso_version"
 
+    androidTestImplementation("com.facebook.testing.screenshot:core:$facebook_screenshot_test_version") {
+        exclude group: 'com.crittercism.dexmaker', module: 'dexmaker'
+        exclude group: 'com.crittercism.dexmaker', module: 'dexmaker-dx'
+    }
+
     debugImplementation("androidx.fragment:fragment-testing:$fragment_version") {
         exclude group: "androidx.test", module: "core"
     }
