@@ -11,15 +11,6 @@ This is a template to build an Android app applying good practices and using a c
 
 # Application architecture
 
-In the following images you will see how the app is built and what its levels of abstraction are.
-
-## General
-
-<p align="center">
-  <img src="https://github.com/santimattius/android-arch-template/blob/master/screenshoot/android-clean-arch-general.png?raw=true" alt="general architecture"/>
-</p>
-
-## Layers
 <p align="center">
   <img src="https://github.com/santimattius/android-arch-template/blob/master/screenshoot/android-clean-arch-layers.png?raw=true" alt="architecture layers"/>
 </p>
