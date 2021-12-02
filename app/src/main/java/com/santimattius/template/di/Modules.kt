@@ -29,7 +29,7 @@ private val presentationModule = module {
  * domain layer definition module
  */
 private val domainModule = module {
-    factory { GetPictures(repository = get<PicturesRepository>()) }
+    factory<GetPictures> { GetPictures(repository = get<PicturesRepository>()) }
 }
 
 /**

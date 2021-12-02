@@ -4,7 +4,6 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.santimattius.template.core.EspressoIdlingResource
-import io.mockk.MockKAnnotations
 import org.junit.After
 import org.junit.Before
 import org.junit.runner.RunWith
@@ -12,14 +11,20 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.module.Module
 import org.koin.test.KoinTest
+import org.mockito.MockitoAnnotations
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 abstract class UITest : KoinTest {
 
+    private lateinit var dependencies: Module
+
+    abstract fun defineModules(): Module
+
     @Before
     fun setup() {
-        MockKAnnotations.init(this)
+        MockitoAnnotations.initMocks(this)
+        dependencies = defineModules()
         loadKoinModules(dependencies)
         IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
     }
@@ -30,5 +35,4 @@ abstract class UITest : KoinTest {
         unloadKoinModules(dependencies)
     }
 
-    abstract val dependencies: Module
 }
