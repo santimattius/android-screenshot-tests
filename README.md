@@ -36,7 +36,17 @@ Below you will find the libraries used to build the template and according to my
 - **Kotlin coroutines**
   - https://kotlinlang.org/docs/reference/coroutines-overview.html
 - **Mockk**, testing library
-  - https://mockk.io/  
+  - https://mockk.io/
+- **screenshot-tests-for-android**  
+  - http://facebook.github.io/screenshot-tests-for-android/  
+
+## Run Screenshot tests
+
+```
+  ./gradlew connectedCheck
+  
+```
+
 
 ## Referencias
 
