@@ -1,17 +1,15 @@
-package com.santimattius.template
+package com.santimattius.template.presentation.fragments
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
+import com.santimattius.template.*
 import com.santimattius.template.domain.usecases.GetPictures
-import com.santimattius.template.presentation.fragments.HomeFragment
 import com.santimattius.template.presentation.models.PictureUiModel
 import com.santimattius.template.presentation.models.mapping.asUiModels
 import com.santimattius.template.recyclerview.RecyclerViewInteraction
-import io.mockk.coEvery
-import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.Matchers.not
@@ -20,6 +18,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.module.Module
 import org.koin.dsl.module
+import org.mockito.Mock
+import org.mockito.Mockito
 
 @MediumTest
 @ExperimentalCoroutinesApi
@@ -29,13 +29,14 @@ class HomeFragmentTest : UITest() {
     @get:Rule
     val coroutinesTestRule = CoroutinesTestRule()
 
-    @MockK
-    private lateinit var getPictures: GetPictures
+    @Mock
+    lateinit var getPictures: GetPictures
 
-    override val dependencies: Module
-        get() = module {
-            factory<GetPictures> { getPictures }
+    override fun defineModules(): Module {
+        return module {
+            single<GetPictures> { getPictures }
         }
+    }
 
     @Test
     fun showsEmptyCaseIfThereAreNoPictures() = runBlockingTest {
@@ -79,12 +80,12 @@ class HomeFragmentTest : UITest() {
     }
 
     private fun givenThereAreNoPictures() {
-        coEvery { getPictures.invoke() } returns emptyList()
+        runBlockingTest { Mockito.`when`(getPictures.invoke()).thenReturn(emptyList()) }
     }
 
     private fun givenThereAreSomePictures(): List<PictureUiModel> {
         val pictures = PictureMother.createPictures()
-        coEvery { getPictures.invoke() } returns pictures
+        runBlockingTest { Mockito.`when`(getPictures.invoke()).thenReturn(pictures) }
         return pictures.asUiModels()
     }
 }

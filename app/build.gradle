@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'jacoco'
+    id 'com.facebook.testing.screenshot'
 }
 
 jacoco {
@@ -39,14 +40,14 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.santimattius.template"
-        minSdkVersion 21
+        applicationId "com.santimattius.template.shot"
+        minSdkVersion 23
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.santimattius.template.TestRunner"
     }
 
     buildTypes {
@@ -67,9 +68,10 @@ android {
         jvmTarget = '1.8'
     }
 
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding = true
     }
+
     testOptions {
         unitTests {
             includeAndroidResources = true
@@ -89,6 +91,9 @@ android {
 
 }
 
+screenshots {
+    referenceDir = "$projectDir/build/reports/screenshots"
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -158,7 +163,9 @@ dependencies {
     androidTestImplementation("androidx.test:core:$test_core_version") {
         force true
     }
-    androidTestImplementation "io.mockk:mockk-android:$mockk_version"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_android_version"
+    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
+    androidTestImplementation "com.github.tmurakami:dexopener:$dexopener_version"
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_testing_version") {
         exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
     }
@@ -178,6 +185,11 @@ dependencies {
     // dependency to appear on your APK's compile classpath or the test APK
     // classpath.
     androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$espresso_version"
+
+    androidTestImplementation("com.facebook.testing.screenshot:core:$facebook_screenshot_test_version") {
+        exclude group: 'com.crittercism.dexmaker', module: 'dexmaker'
+        exclude group: 'com.crittercism.dexmaker', module: 'dexmaker-dx'
+    }
 
     debugImplementation("androidx.fragment:fragment-testing:$fragment_version") {
         exclude group: "androidx.test", module: "core"
