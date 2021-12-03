@@ -1,4 +1,4 @@
-# Android App Template
+# Android Screenshot Tests
 
 [![codecov](https://codecov.io/gh/santimattius/android-arch-template/branch/master/graph/badge.svg?token=7ITWBL56NJ)](https://codecov.io/gh/santimattius/android-arch-template) [![codecov](https://www.travis-ci.com/santimattius/android-arch-template.svg?token=P7xvicFZMo2reEHHNuJS&branch=master)](https://www.travis-ci.com/santimattius/android-arch-template)
 
