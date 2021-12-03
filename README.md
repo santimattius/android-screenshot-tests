@@ -43,8 +43,9 @@ Below you will find the libraries used to build the template and according to my
 ## Run Screenshot tests
 
 ```
-  ./gradlew connectedCheck
-  
+
+./gradlew runDebugAndroidTestScreenshotTest
+
 ```
 
 
