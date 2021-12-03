@@ -37,7 +37,7 @@ Below you will find the libraries used to build the template and according to my
   - https://kotlinlang.org/docs/reference/coroutines-overview.html
 - **Mockk**, testing library
   - https://mockk.io/
-- **screenshot-tests-for-android**  
+- **Screenshot tests for android**  
   - http://facebook.github.io/screenshot-tests-for-android/  
 
 ## Run Screenshot tests
